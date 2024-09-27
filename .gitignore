@@ -96,6 +96,11 @@ ServiceFabricBackup/
 # Resharper files
 *.DotSettings.user
 
+# Ignore SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
 # Entity Framework Migrations
 migrations/
 

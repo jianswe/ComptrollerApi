@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace HPlusSport.API.Models
+namespace ComptrollerApi.Models
 {
     public class Product 
     {

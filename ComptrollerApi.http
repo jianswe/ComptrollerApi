@@ -1,0 +1,6 @@
+@ComptrollerApi_HostAddress = http://localhost:5086
+
+GET {{ComptrollerApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace HPlusSport.API.Models
+namespace ComptrollerApi.Models
 {
     public static class ModelBuilderExtensions
     {

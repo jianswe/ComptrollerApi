@@ -1,4 +1,4 @@
-namespace HPlusSport.API.Models
+namespace ComptrollerApi.Models
 {
     public class Category
     {
