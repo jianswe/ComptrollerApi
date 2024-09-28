@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using ComptrollerApi.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -22,11 +23,11 @@ public class AuthController : ControllerBase
 
     // POST: api/auth/register
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] User model)
+    public async Task<IActionResult> Register([FromBody] RegisterModel model)
     {
         if (ModelState.IsValid)
         {
-            var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+            var user = new IdentityUser { UserName = model.Username, Email = model.Email };
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (result.Succeeded)
@@ -43,15 +44,15 @@ public class AuthController : ControllerBase
 
     // POST: api/auth/login
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] User model)
+    public async Task<IActionResult> Login([FromBody] LoginModel model)
     {
         if (ModelState.IsValid)
         {
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, false, false);
 
             if (result.Succeeded)
             {
-                var user = await _userManager.FindByEmailAsync(model.Email);
+                var user = await _userManager.FindByNameAsync(model.Username);
                 var token = GenerateJwtToken(user);
 
                 return Ok(new { token });
