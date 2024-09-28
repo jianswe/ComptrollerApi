@@ -1,10 +1,12 @@
 using ComptrollerApi.Data;
 using ComptrollerApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace ComptrollerApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TaxReportsController : ControllerBase

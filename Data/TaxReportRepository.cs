@@ -7,9 +7,9 @@ namespace ComptrollerApi.Data
 {
     public class TaxReportRepository
     {
-        private readonly TaxReportDbContext _context; // allow the repository to interact with the database instead of using in-memory storage.
+        private readonly ApplicationDbContext _context; // allow the repository to interact with the database instead of using in-memory storage.
 
-        public TaxReportRepository(TaxReportDbContext context)
+        public TaxReportRepository(ApplicationDbContext context)
         {
             _context = context;
         }

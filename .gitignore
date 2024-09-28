@@ -118,3 +118,9 @@ coverage/
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
+
+# Ignore appsettings.json
+appsettings.json
+
+# Optionally, ignore other environment-specific configuration files
+appsettings.Production.json

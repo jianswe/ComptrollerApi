@@ -2,12 +2,14 @@
 
 using Microsoft.EntityFrameworkCore;
 using ComptrollerApi.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace ComptrollerApi.Data
 {
-    public class TaxReportDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
-        public TaxReportDbContext(DbContextOptions<TaxReportDbContext> options) : base(options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
 
