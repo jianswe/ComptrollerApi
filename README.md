@@ -19,7 +19,31 @@ The API will be built around a simple tax report submission system where busines
     - PUT /api/taxreports/{id}: Update a submitted tax report.
     - DELETE /api/taxreports/{id}: Delete a tax report.
     - GET /api/revenue/{year}: Get annual revenue summary for the comptroller.
-3. using SQLite as a persistent database with Entity Framework Core
+3. Using SQLite as a persistent database with Entity Framework Core
     - Setting up EF Core with SQLite.
     - Using dependency injection to persist the database context across requests.
     - Using migrations to generate and update the database schema.
+4. Using Microsoft.AspNetCore.Authentication.JwtBearer and Microsoft.AspNetCore.Identity for login and register. 
+
+## Steps to Deploy
+1. Create a Linux App Service Plan 
+```
+az login
+az group create --name ComptrollerApiResourceGroup --location westus
+az appservice plan create --name ComptrollerApiServicePlan --resource-group ComptrollerApiResourceGroup --sku B1 --is-linux
+az webapp create --name ComptrollerApi --resource-group ComptrollerApiResourceGroup --plan ComptrollerApiServicePlan --runtime "DOTNETCORE|8.0"
+```
+2. Publish Your Application 
+    - `dotnet publish --configuration Release`
+3. Deploy the Application to Azure 
+    - Zip the published output:
+    ```
+    cd bin\Release\netX.X\publish
+    zip -r deployment.zip .
+    ```
+    - Deploy the zip file: `az webapp deployment source config-zip --resource-group ComptrollerApiResourceGroup --name ComptrollerApi --src deployment.zip`
+
+## Testing 
+### App Service Setting 
+* Configuration: turn off "HTTPS only" 
+* URL: http://comptrollerapi.azurewebsites.net/api/taxreports
