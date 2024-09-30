@@ -13,12 +13,14 @@ public class AuthController : ControllerBase
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly IConfiguration _configuration;
+    private readonly ILogger<AuthController> _logger;
 
-    public AuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IConfiguration configuration)
+    public AuthController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IConfiguration configuration, ILogger<AuthController> logger)
     {
         _userManager = userManager;
         _signInManager = signInManager;
         _configuration = configuration;
+        _logger = logger;
     }
 
     // POST: api/auth/register
@@ -59,7 +61,9 @@ public class AuthController : ControllerBase
             }
             else 
             {
-                return Unauthorized();
+                // Log the failure reason 
+                _logger.LogWarning($"Failed login attempt for user: {model.Username}. Reason: {result}");
+                return Unauthorized(result);
             }
         }
         return BadRequest("Invalid request");

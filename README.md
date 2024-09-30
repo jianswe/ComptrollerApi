@@ -38,12 +38,15 @@ az webapp create --name ComptrollerApi --resource-group ComptrollerApiResourceGr
 3. Deploy the Application to Azure 
     - Zip the published output:
     ```
-    cd bin\Release\netX.X\publish
+    cd bin/Release/net8.0/publish
     zip -r deployment.zip .
     ```
-    - Deploy the zip file: `az webapp deployment source config-zip --resource-group ComptrollerApiResourceGroup --name ComptrollerApi --src deployment.zip`
+    - Deploy the zip file: `az webapp deploy --resource-group ComptrollerApiResourceGroup --name ComptrollerApi --src-path deployment.zip --type zip`
 
 ## Testing 
 ### App Service Setting 
 * Configuration: turn off "HTTPS only" 
 * URL: http://comptrollerapi.azurewebsites.net/api/taxreports
+
+## Issues 
+* Not able to sign in through frontend React app, got 401 unauthorized error. 

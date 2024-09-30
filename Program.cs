@@ -12,14 +12,21 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
+// Read the CorsOrigins environment variable
+string corsOriginsValue = builder.Configuration["CorsOrigins"];
+
+// If the environment variable is set, use it; otherwise, fall back to appsettings.json
+string[]? corsOrigins = corsOriginsValue?.Split(',') ?? builder.Configuration.GetSection("CorsOrigins").Get<string[]>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp",
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000")
+            policy.WithOrigins(corsOrigins)
                   .AllowAnyMethod()
-                  .AllowAnyHeader();
+                  .AllowAnyHeader()
+                  .AllowCredentials();
         });
 });
 
